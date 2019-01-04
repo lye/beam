@@ -52,8 +52,16 @@ message("BRANCH_NAME: ${BRANCH_NAME}")
 project(beam VERSION ${VERSION_MAJOR}.${VERSION_MINOR}.${VERSION_REVISION})
 
 message("BEAM_VERSION: ${PROJECT_VERSION}")
+EXEC_PROGRAM(uname OUTPUT_VARIABLE SYSTEM_NAME)
+message("SYSTEM_NAME: ${SYSTEM_NAME}")
 
-if(UNIX AND NOT APPLE AND NOT ANDROID)
+if(SYSTEM_NAME STREQUAL "FreeBSD")
+	include_directories(SYSTEM /usr/local/include)
+	link_directories(/usr/local/lib)
+	set(CMAKE_POSITION_INDEPENDENT_CODE ON)
+	set(FREEBSD TRUE)
+elseif(UNIX AND NOT APPLE AND NOT ANDROID)
+	error("nope")
     set(LINUX TRUE)
 endif()
 

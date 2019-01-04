@@ -38,8 +38,12 @@
 
 /***************************************************************************/
 
-#if defined(__linux__) || defined(__ANDROID__)
-#   include <endian.h>
+#if defined(__linux__) || defined(__ANDROID__) || defined(__FreeBSD__)
+#	if defined(__FreeBSD__)
+#		include <sys/endian.h>
+#	else
+#   	include <endian.h>
+#	endif
 #   if (__BYTE_ORDER == __LITTLE_ENDIAN)
 #       define __YAS_LITTLE_ENDIAN (1)
 #       define __YAS_BIG_ENDIAN (0)

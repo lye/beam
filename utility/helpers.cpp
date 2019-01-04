@@ -27,6 +27,11 @@
     #include <sys/syscall.h>
     #include <sys/signal.h>
     #include <errno.h>
+#elif defined __FreeBSD__
+    #include <unistd.h>
+	#include <termios.h>
+	#include <signal.h>	
+	#include <pthread_np.h>
 #elif defined _WIN32
     #define WIN32_LEAN_AND_MEAN
     #include <windows.h>
@@ -122,6 +127,8 @@ std::vector<uint8_t> from_hex(const std::string& str, bool* wholeStringIsNumber)
 uint64_t get_thread_id() {
 #if defined __linux__
     return syscall(__NR_gettid);
+#elif defined __FreeBSD__
+	return pthread_getthreadid_np();
 #elif defined _WIN32
     return GetCurrentThreadId();
 #else

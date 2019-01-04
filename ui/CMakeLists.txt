@@ -2,7 +2,7 @@ set (TARGET_NAME "beam-wallet-ui")
 if(LINUX)
     set (OUTPUT_NAME "BeamWallet")
 else()
-    set (OUTPUT_NAME "Beam Wallet")
+    set (OUTPUT_NAME "Beam-Wallet")
 endif()
 set (CMAKE_PREFIX_PATH $ENV{QT5_ROOT_DIR})
 

@@ -21,6 +21,12 @@
 #include <string.h>
 #ifdef WIN32
     #include <winsock2.h>
+#elif defined __FreeBSD__
+	#include <sys/types.h>
+	#include <sys/socket.h>
+	#include <arpa/inet.h>
+    #include <netinet/ip.h>
+	#include <netinet/in.h>
 #else
     #include <netinet/ip.h>
 #endif // WIN32
